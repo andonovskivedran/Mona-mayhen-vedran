@@ -26,3 +26,9 @@ Run these from the repository root:
 - Localized content follows the existing locale directory names: `es`, `pt_BR`, and `ko`. The workshop lessons are in `workshop/<locale>/`; translated site pages are in `docs/<locale>/`; translated READMEs are `README.es.md`, `README.pt_BR.md`, and `README.ko.md`.
 - `.github/workflows/localization-sync.yml` synchronizes changes to supported source files and maintains localization metadata in `localizations/<locale>/.localization-state.json`. Preserve this metadata and the existing source-to-locale path mapping when updating translations.
 - The locale rules used by the synchronization workflow live in `.github/skills/localizations/rules/`. Preserve code, commands, URLs, markup, and machine-readable content when editing localized material.
+
+## Astro app visual direction
+
+- Keep new app UI in the retro arcade style: near-black navy `#0a0a1a`, neon green `#5fed83`, and purple `#8a2be2`; use the Press Start 2P display font with a readable monospace body font.
+- Favor subtle neon glows, CRT scanlines, and restrained motion over heavy decoration. Honor `prefers-reduced-motion` for animations and transitions.
+- Keep the battle interface responsive and readable; preserve clear focus states, accessible status feedback, and contribution-grid labels when styling interactive components.
