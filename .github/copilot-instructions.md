@@ -18,7 +18,9 @@ Run these from the repository root:
 | Build the Astro app | `npm run build` |
 | Preview the built Astro app | `npm run preview` |
 
-`package.json` does not define test or lint scripts, and there is no configured test runner or single-test command.
+Use Node.js 24+. Run `npm test` for API and battle-logic tests, `npm run check` for Astro/TypeScript diagnostics, and `npm run build` for production verification. Tests use the built-in Node test runner; run one with `node --test scripts/battle.test.ts`.
+
+Shared contribution types and schema validation live in `src/lib/contributions.ts`; battle calculations are in `src/lib/battle.ts`. Browser interactions live in `src/scripts/battle.ts`. Global app styles are in `src/styles/arena.css` so dynamically created contribution cells receive their styles.
 
 ## Content and localization conventions
 

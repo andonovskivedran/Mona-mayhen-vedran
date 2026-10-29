@@ -3,6 +3,8 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
+    "test": "node --test scripts/*.test.ts",
+    "check": "astro check",
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
@@ -11,5 +13,10 @@
   "dependencies": {
     "@astrojs/node": "^10.1.4",
     "astro": "^6.4.8"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.12",
+    "@types/node": "^24.19.2",
+    "typescript": "^6.0.3"
   }
 }
