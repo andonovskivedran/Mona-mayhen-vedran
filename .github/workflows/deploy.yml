@@ -21,22 +21,30 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: npm
+
+      - run: npm ci
+
+      - name: Build the battle arena for Pages
+        run: npm run build:pages
 
       - name: Prepare deployment
         run: |
-          mkdir -p ./_site
-          cp -r docs/* ./_site/
-          mkdir -p ./_site/workshop/pt_BR ./_site/workshop/es
-          cp -r workshop/pt_BR/* ./_site/workshop/pt_BR/
-          cp -r workshop/es/* ./_site/workshop/es/
-          touch ./_site/.nojekyll
+          mkdir -p dist-pages/guide dist-pages/workshop
+          cp -r docs/. dist-pages/guide/
+          cp -r workshop/. dist-pages/workshop/
+          touch dist-pages/.nojekyll
 
-      - uses: actions/configure-pages@v4
+      - uses: actions/configure-pages@v5
 
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: _site
+          path: dist-pages
 
       - name: Deploy to GitHub Pages
         id: deployment

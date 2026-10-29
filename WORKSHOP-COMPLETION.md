@@ -27,7 +27,11 @@ npm run preview
 
 Use `octocat` and `torvalds` for a live matchup. Also test empty/invalid usernames, Enter submission, mobile layouts, calendar hover/tap and keyboard arrows, sound/theme controls, persisted history and clipboard sharing.
 
-The workshop's Copilot slash commands are interactive learning exercises; this implementation was completed with Codex. It does not claim to have run Copilot `/login`, `/fleet`, `/delegate` or `/review` sessions. The existing GitHub Pages workflow publishes the static workshop, while this application requires a Node server (`HOST=0.0.0.0 PORT=4321 node dist/server/entry.mjs`).
+The workshop's Copilot slash commands are interactive learning exercises; this implementation was completed with Codex. It does not claim to have run Copilot `/login`, `/fleet`, `/delegate` or `/review` sessions. The standard build runs on a Node server (`HOST=0.0.0.0 PORT=4321 node dist/server/entry.mjs`).
+
+## GitHub Pages publication
+
+`npm run build:pages` generates the static arena in `dist-pages/`, using `astro.pages.config.mjs`. The arena is published at `https://andonovskivedran.github.io/Mona-mayhen-vedran/`; workshop pages are retained under `/guide/`. The static client retrieves public contribution calendars from `https://github-contributions-api.jogruber.de`, a third-party CORS-enabled API, and validates/normalizes them before rendering. Only the entered public usernames are sent; no login or token is required. This service may cache its data or rate-limit requests. The server build continues to use GitHub directly through its local proxy.
 
 ## Verified results
 

@@ -5,7 +5,7 @@
 - This repository contains two related but separate deliverables:
   - The workshop website is static HTML/CSS/JavaScript in `docs/`, with workshop lesson sources in `workshop/`. `docs/step.html` loads lesson Markdown and uses `<!-- track:vscode:start/end -->` and `<!-- track:cli:start/end -->` markers to show track-specific instructions.
   - The Mona Mayhem application is an Astro server app in `src/`. `src/pages/index.astro` is its page, and `src/pages/api/contributions/[username].ts` is the username API route. `astro.config.mjs` configures server output with the standalone `@astrojs/node` adapter.
-- GitHub Pages currently deploys only `docs/` and `workshop/` through `.github/workflows/deploy.yml`; it does not build or deploy the Astro app. Keep this distinction in mind when changing deployment behavior.
+- GitHub Pages deploys the battle arena using `astro.pages.config.mjs` and `pages-app/pages/index.astro`. The static build uses the CORS-enabled public contribution API; the normal Node build keeps its local API proxy. The workflow retains workshop pages under `/guide/`.
 
 ## Build and local commands
 
@@ -21,6 +21,8 @@ Run these from the repository root:
 Use Node.js 24+. Run `npm test` for API and battle-logic tests, `npm run check` for Astro/TypeScript diagnostics, and `npm run build` for production verification. Tests use the built-in Node test runner; run one with `node --test scripts/battle.test.ts`.
 
 Shared contribution types and schema validation live in `src/lib/contributions.ts`; battle calculations are in `src/lib/battle.ts`. Browser interactions live in `src/scripts/battle.ts`. Global app styles are in `src/styles/arena.css` so dynamically created contribution cells receive their styles.
+
+Run `npm run build:pages` to produce `dist-pages/` for GitHub Pages. Keep links and assets relative to `import.meta.env.BASE_URL`. `src/lib/public-contributions.ts` validates and converts the public API calendar into the shared response format. Never put GitHub tokens into browser code.
 
 ## Content and localization conventions
 

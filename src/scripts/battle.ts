@@ -1,5 +1,6 @@
 import { contributionDays, FALLBACK_COLORS, longestStreak, readHistory, shareText, USERNAME_PATTERN, winnerOf, type BattleRecord, type ContributionData } from '../lib/battle';
 import { isContributionData } from '../lib/contributions';
+import { normalizePublicContributions, publicContributionUrl } from '../lib/public-contributions';
 
 const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
 const form = $<HTMLFormElement>('battle-form');
@@ -132,9 +133,11 @@ renderHistory();
 $('clear-history').addEventListener('click', () => { history = []; try { localStorage.removeItem(historyKey); } catch { /* Keep in-memory controls usable. */ } renderHistory(); announce('Battle history cleared.'); });
 
 async function fetchPlayer(username: string, signal: AbortSignal): Promise<ContributionData> {
-  const response = await fetch(`/api/contributions/${encodeURIComponent(username)}`, { signal });
+  const staticHosting = import.meta.env.PUBLIC_STATIC_CONTRIBUTIONS === 'true';
+  const response = await fetch(staticHosting ? publicContributionUrl(username) : `/api/contributions/${encodeURIComponent(username)}`, { signal });
   const body = await response.json();
-  if (!response.ok) throw new Error(`${username}: ${typeof body.error === 'string' ? body.error : 'Unable to load contribution data.'}`);
+  if (!response.ok) throw new Error(`${username}: ${response.status === 404 ? 'GitHub user not found.' : response.status === 429 ? 'Too many requests. Please try again in a few minutes.' : typeof body.error === 'string' ? body.error : 'Unable to load contribution data. Please try again.'}`);
+  if (staticHosting) return normalizePublicContributions(body);
   if (!isContributionData(body)) throw new Error('The contribution response could not be read. Please try again.');
   return body;
 }
