@@ -2,6 +2,10 @@
 
 # 🎮 Mona Mayhem
 
+## 게임 플레이
+
+**[Mona Mayhem 플레이하기](https://andonovskivedran.github.io/Mona-mayhen-vedran/)**
+
 **VS Code 및 GitHub Copilot CLI 워크숍** — GitHub 기여도 배틀 아레나 만들기
 
 두 사용자의 GitHub 기여 그래프를 비교하는 레트로 아케이드 스타일 웹사이트를 Astro로 만드는 워크숍 템플릿입니다. 이 저장소는 **시작점**이며, GitHub Copilot을 사용해 단계별로 앱을 완성합니다.
