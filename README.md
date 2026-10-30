@@ -2,6 +2,10 @@
 
 # 🎮 Mona Mayhem
 
+## Play the game
+
+**[Play Mona Mayhem](https://andonovskivedran.github.io/Mona-mayhen-vedran/)**
+
 **VS Code & GitHub Copilot CLI Workshop** — Build a GitHub Contribution Battle Arena
 
 A workshop template for building a retro arcade-themed website with Astro that compares GitHub contribution graphs of two users. This is the **starting point** — you'll build the app step by step using GitHub Copilot.
